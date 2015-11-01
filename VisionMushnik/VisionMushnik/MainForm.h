@@ -34,14 +34,18 @@ namespace VisionMushnik {
 				delete components;
 			}
 		}
+
 	private: System::Windows::Forms::Button^  button1;
+	protected:
+	private: System::ComponentModel::IContainer^  components;
+
 	protected:
 
 	private:
 		/// <summary>
 		/// Required designer variable.
 		/// </summary>
-		System::ComponentModel::Container ^components;
+
 
 #pragma region Windows Form Designer generated code
 		/// <summary>
@@ -55,24 +59,22 @@ namespace VisionMushnik {
 			// 
 			// button1
 			// 
-			this->button1->Location = System::Drawing::Point(110, 108);
+			this->button1->Location = System::Drawing::Point(106, 95);
 			this->button1->Name = L"button1";
 			this->button1->Size = System::Drawing::Size(75, 23);
 			this->button1->TabIndex = 0;
 			this->button1->Text = L"button1";
 			this->button1->UseVisualStyleBackColor = true;
+			this->button1->Click += gcnew System::EventHandler(this, &MainForm::button1_Click);
 			// 
 			// MainForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(324, 302);
+			this->ClientSize = System::Drawing::Size(725, 347);
 			this->Controls->Add(this->button1);
 			this->Name = L"MainForm";
 			this->Text = L"MainForm";
 			this->ResumeLayout(false);
 
 		}
-#pragma endregion
-	};
-}

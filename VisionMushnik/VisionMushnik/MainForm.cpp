@@ -12,4 +12,7 @@ void Main(array<String^>^ args)
 
 	VisionMushnik::MainForm form;
 	Application::Run(%form);
+
+
 }
+
