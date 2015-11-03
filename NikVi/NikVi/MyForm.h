@@ -72,11 +72,11 @@ namespace NikVi {
 			// 
 			// button1
 			// 
-			this->button1->Location = System::Drawing::Point(246, 473);
+			this->button1->Location = System::Drawing::Point(744, 472);
 			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(75, 23);
+			this->button1->Size = System::Drawing::Size(90, 23);
 			this->button1->TabIndex = 7;
-			this->button1->Text = L"ok";
+			this->button1->Text = L"open";
 			this->button1->UseVisualStyleBackColor = true;
 			this->button1->Click += gcnew System::EventHandler(this, &MyForm::button1_Click);
 			// 
@@ -104,9 +104,9 @@ namespace NikVi {
 			// 
 			this->textBox1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->textBox1->Location = System::Drawing::Point(337, 474);
+			this->textBox1->Location = System::Drawing::Point(237, 474);
 			this->textBox1->Name = L"textBox1";
-			this->textBox1->Size = System::Drawing::Size(415, 21);
+			this->textBox1->Size = System::Drawing::Size(472, 21);
 			this->textBox1->TabIndex = 10;
 			// 
 			// MyForm
