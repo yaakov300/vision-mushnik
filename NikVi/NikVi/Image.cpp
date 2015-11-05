@@ -6,12 +6,13 @@ image.cpp
 
 #include <stdlib.h>
 #include <iostream>
-#include "image.h"
+#include <fstream>
+#include "Image.h"
 #include <cmath>
 using namespace std;
 
-Image::Image()
-/* Creates an Image 0x0 */
+ImageMatrix::ImageMatrix()
+/* Creates an ImageMatrix 0x0 */
 {
 	N = 0;
 	M = 0;
@@ -20,8 +21,8 @@ Image::Image()
 	pixelVal = NULL;
 }
 
-Image::Image(int numRows, int numCols, int grayLevels)
-/* Creates an Image of numRows x numCols and creates the arrays for it*/
+ImageMatrix::ImageMatrix(int numRows, int numCols, int grayLevels)
+/* Creates an ImageMatrix of numRows x numCols and creates the arrays for it*/
 {
 
 	N = numRows;
@@ -37,8 +38,8 @@ Image::Image(int numRows, int numCols, int grayLevels)
 	}
 }
 
-Image::~Image()
-/*destroy image*/
+ImageMatrix::~ImageMatrix()
+/*destroy ImageMatrix*/
 {
 	N = 0;
 	M = 0;
@@ -50,8 +51,8 @@ Image::~Image()
 	delete pixelVal;
 }
 
-Image::Image(const Image& oldImage)
-/*copies oldImage into new Image object*/
+ImageMatrix::ImageMatrix(const ImageMatrix& oldImage)
+/*copies oldImage into new ImageMatrix object*/
 {
 	N = oldImage.N;
 	M = oldImage.M;
@@ -66,7 +67,7 @@ Image::Image(const Image& oldImage)
 	}
 }
 
-void Image::operator=(const Image& oldImage)
+void ImageMatrix::operator=(const ImageMatrix& oldImage)
 /*copies oldImage into whatever you = it to*/
 {
 	N = oldImage.N;
@@ -82,7 +83,7 @@ void Image::operator=(const Image& oldImage)
 	}
 }
 
-void Image::setImageInfo(int numRows, int numCols, int maxVal)
+void ImageMatrix::setImageInfo(int numRows, int numCols, int maxVal)
 /*sets the number of rows, columns and graylevels*/
 {
 	N = numRows;
@@ -90,7 +91,7 @@ void Image::setImageInfo(int numRows, int numCols, int maxVal)
 	Q = maxVal;
 }
 
-void Image::getImageInfo(int &numRows, int &numCols, int &maxVal)
+void ImageMatrix::getImageInfo(int &numRows, int &numCols, int &maxVal)
 /*returns the number of rows, columns and gray levels*/
 {
 	numRows = N;
@@ -98,21 +99,21 @@ void Image::getImageInfo(int &numRows, int &numCols, int &maxVal)
 	maxVal = Q;
 }
 
-int Image::getPixelVal(int row, int col)
+int ImageMatrix::getPixelVal(int row, int col)
 /*returns the gray value of a specific pixel*/
 {
 	return pixelVal[row][col];
 }
 
 
-void Image::setPixelVal(int row, int col, int value)
+void ImageMatrix::setPixelVal(int row, int col, int value)
 /*sets the gray value of a specific pixel*/
 {
 	pixelVal[row][col] = value;
 }
 
-bool Image::inBounds(int row, int col)
-/*checks to see if a pixel is within the image, returns true or false*/
+bool ImageMatrix::inBounds(int row, int col)
+/*checks to see if a pixel is within the ImageMatrix, returns true or false*/
 {
 	if (row >= N || row < 0 || col >= M || col < 0)
 		return false;
@@ -120,9 +121,9 @@ bool Image::inBounds(int row, int col)
 	return true;
 }
 
-void Image::getSubImage(int upperLeftRow, int upperLeftCol, int lowerRightRow,
-	int lowerRightCol, Image& oldImage)
-	/*Pulls a sub image out of oldImage based on users values, and then stores it
+void ImageMatrix::getSubImage(int upperLeftRow, int upperLeftCol, int lowerRightRow,
+	int lowerRightCol, ImageMatrix& oldImage)
+	/*Pulls a sub ImageMatrix out of oldImage based on users values, and then stores it
 	in oldImage*/
 {
 	int width, height;
@@ -130,7 +131,7 @@ void Image::getSubImage(int upperLeftRow, int upperLeftCol, int lowerRightRow,
 	width = lowerRightCol - upperLeftCol;
 	height = lowerRightRow - upperLeftRow;
 
-	Image tempImage(height, width, Q);
+	ImageMatrix tempImage(height, width, Q);
 
 	for (int i = upperLeftRow; i < lowerRightRow; i++)
 	{
@@ -141,7 +142,7 @@ void Image::getSubImage(int upperLeftRow, int upperLeftCol, int lowerRightRow,
 	oldImage = tempImage;
 }
 
-int Image::meanGray()
+int ImageMatrix::meanGray()
 /*returns the mean gray levels of the Image*/
 {
 	int totalGray = 0;
@@ -157,7 +158,7 @@ int Image::meanGray()
 	return (totalGray / cells);
 }
 
-void Image::enlargeImage(int value, Image& oldImage)
+void ImageMatrix::enlargeImage(int value, ImageMatrix& oldImage)
 /*enlarges Image and stores it in tempImage, resizes oldImage and stores the
 larger image in oldImage*/
 {
@@ -169,7 +170,7 @@ larger image in oldImage*/
 	cols = oldImage.M * value;
 	gray = oldImage.Q;
 
-	Image tempImage(rows, cols, gray);
+	ImageMatrix tempImage(rows, cols, gray);
 
 	for (int i = 0; i < oldImage.N; i++)
 	{
@@ -191,7 +192,7 @@ larger image in oldImage*/
 	oldImage = tempImage;
 }
 
-void Image::shrinkImage(int value, Image& oldImage)
+void ImageMatrix::shrinkImage(int value, ImageMatrix& oldImage)
 /*Shrinks image as storing it in tempImage, resizes oldImage, and stores it in
 oldImage*/
 {
@@ -201,7 +202,7 @@ oldImage*/
 	cols = oldImage.M / value;
 	gray = oldImage.Q;
 
-	Image tempImage(rows, cols, gray);
+	ImageMatrix tempImage(rows, cols, gray);
 
 	for (int i = 0; i < rows; i++)
 	{
@@ -211,12 +212,12 @@ oldImage*/
 	oldImage = tempImage;
 }
 
-void Image::reflectImage(bool flag, Image& oldImage)
+void ImageMatrix::reflectImage(bool flag, ImageMatrix& oldImage)
 /*Reflects the Image based on users input*/
 {
 	int rows = oldImage.N;
 	int cols = oldImage.M;
-	Image tempImage(oldImage);
+	ImageMatrix tempImage(oldImage);
 	if (flag == true) //horizontal reflection
 	{
 		for (int i = 0; i < rows; i++)
@@ -237,13 +238,13 @@ void Image::reflectImage(bool flag, Image& oldImage)
 	oldImage = tempImage;
 }
 
-void Image::translateImage(int value, Image& oldImage)
+void ImageMatrix::translateImage(int value, ImageMatrix& oldImage)
 /*translates image down and right based on user value*/
 {
 	int rows = oldImage.N;
 	int cols = oldImage.M;
 	int gray = oldImage.Q;
-	Image tempImage(N, M, Q);
+	ImageMatrix tempImage(N, M, Q);
 
 	for (int i = 0; i < (rows - value); i++)
 	{
@@ -254,7 +255,7 @@ void Image::translateImage(int value, Image& oldImage)
 	oldImage = tempImage;
 }
 
-void Image::rotateImage(int theta, Image& oldImage)
+void ImageMatrix::rotateImage(int theta, ImageMatrix& oldImage)
 /*based on users input and rotates it around the center of the image.*/
 {
 	int r0, c0;
@@ -262,7 +263,7 @@ void Image::rotateImage(int theta, Image& oldImage)
 	int rows, cols;
 	rows = oldImage.N;
 	cols = oldImage.M;
-	Image tempImage(rows, cols, oldImage.Q);
+	ImageMatrix tempImage(rows, cols, oldImage.Q);
 
 	float rads = (theta * 3.14159265) / 180.0;
 
@@ -294,10 +295,10 @@ void Image::rotateImage(int theta, Image& oldImage)
 	oldImage = tempImage;
 }
 
-Image Image::operator+(const Image &oldImage)
+ImageMatrix ImageMatrix::operator+(const ImageMatrix &oldImage)
 /*adds images together, half one image, half the other*/
 {
-	Image tempImage(oldImage);
+	ImageMatrix tempImage(oldImage);
 
 	int rows, cols;
 	rows = oldImage.N;
@@ -312,10 +313,10 @@ Image Image::operator+(const Image &oldImage)
 	return tempImage;
 }
 
-Image Image::operator-(const Image& oldImage)
+ImageMatrix ImageMatrix::operator-(const ImageMatrix& oldImage)
 /*subtracts images from each other*/
 {
-	Image tempImage(oldImage);
+	ImageMatrix tempImage(oldImage);
 
 	int rows, cols;
 	rows = oldImage.N;
@@ -338,15 +339,15 @@ Image Image::operator-(const Image& oldImage)
 	return tempImage;
 }
 
-void Image::negateImage(Image& oldImage)
-/*negates image*/
+void ImageMatrix::negateImage(ImageMatrix& oldImage)
+/*negates ImageMatrix*/
 {
 	int rows, cols, gray;
 	rows = N;
 	cols = M;
 	gray = Q;
 
-	Image tempImage(N, M, Q);
+	ImageMatrix tempImage(N, M, Q);
 
 	for (int i = 0; i < rows; i++)
 	{
@@ -355,4 +356,175 @@ void Image::negateImage(Image& oldImage)
 	}
 
 	oldImage = tempImage;
+}
+
+
+int ImageMatrix::readImage(char fname[], ImageMatrix& image)
+{
+	int i, j;
+	int N, M, Q;
+	unsigned char *charImage;
+	char header[100], *ptr;
+	ifstream ifp;
+
+	ifp.open(fname, ios::in | ios::binary);
+
+	if (!ifp)
+	{
+		cout << "Can't read image: " << fname << endl;
+		exit(1);
+	}
+
+	// read header
+
+	ifp.getline(header, 100, '\n');
+	if ((header[0] != 80) || (header[1] != 53))
+	{
+		cout << "Image " << fname << " is not PGM" << endl;
+		exit(1);
+	}
+
+	ifp.getline(header, 100, '\n');
+	while (header[0] == '#')
+		ifp.getline(header, 100, '\n');
+
+	M = strtol(header, &ptr, 0);
+	N = atoi(ptr);
+
+	ifp.getline(header, 100, '\n');
+	Q = strtol(header, &ptr, 0);
+
+	charImage = (unsigned char *) new unsigned char[M*N];
+
+	ifp.read(reinterpret_cast<char *>(charImage), (M*N)*sizeof(unsigned char));
+
+	if (ifp.fail())
+	{
+		cout << "Image " << fname << " has wrong size" << endl;
+		exit(1);
+	}
+
+	ifp.close();
+
+	//
+	// Convert the unsigned characters to integers
+	//
+
+	int val;
+
+	for (i = 0; i<N; i++)
+		for (j = 0; j<M; j++)
+		{
+			val = (int)charImage[i*M + j];
+			image.setPixelVal(i, j, val);
+		}
+
+	delete[] charImage;
+
+
+	return (1);
+
+}
+
+
+int ImageMatrix::readImageHeader(char fname[], int& N, int& M, int& Q, bool& type)
+{
+	int i, j;
+	unsigned char *charImage;
+	char header[100], *ptr;
+	ifstream ifp;
+
+	ifp.open(fname, ios::in | ios::binary);
+
+	if (!ifp)
+	{
+		//cout << "Can't read image: " << fname << endl;
+		//exit(1);
+	}
+
+	// read header
+
+	type = false; // PGM
+
+	ifp.getline(header, 100, '\n');
+	if ((header[0] == 80) && (header[1] == 53))
+	{
+		type = false;
+	}
+	else if ((header[0] == 80) && (header[1] == 54))
+	{
+		type = true;
+	}
+	else
+	{
+		//cout << "ImageMatrix " << fname << " is not PGM or PPM" << endl;
+		//exit(1);
+	}
+
+	ifp.getline(header, 100, '\n');
+	while (header[0] == '#')
+		ifp.getline(header, 100, '\n');
+
+	M = strtol(header, &ptr, 0);
+	N = atoi(ptr);
+
+	ifp.getline(header, 100, '\n');
+
+	Q = strtol(header, &ptr, 0);
+
+	ifp.close();
+
+	return(1);
+}
+
+int ImageMatrix::writeImage(char fname[], ImageMatrix& image)
+{
+	int i, j;
+	int N, M, Q;
+	unsigned char *charImage;
+	ofstream ofp;
+
+	image.getImageInfo(N, M, Q);
+
+	charImage = (unsigned char *) new unsigned char[M*N];
+
+	// convert the integer values to unsigned char
+
+	int val;
+
+	for (i = 0; i<N; i++)
+	{
+		for (j = 0; j<M; j++)
+		{
+			val = image.getPixelVal(i, j);
+			charImage[i*M + j] = (unsigned char)val;
+		}
+	}
+
+	ofp.open(fname, ios::out | ios::binary);
+
+	if (!ofp)
+	{
+		cout << "Can't open file: " << fname << endl;
+		exit(1);
+	}
+
+	ofp << "P5" << endl;
+	ofp << M << " " << N << endl;
+	ofp << Q << endl;
+
+	ofp.write(reinterpret_cast<char *>(charImage), (M*N)*sizeof(unsigned char));
+
+	if (ofp.fail())
+	{
+		cout << "Can't write image " << fname << endl;
+		exit(0);
+	}
+
+	ofp.close();
+
+	delete[] charImage;
+
+	return(1);
+
 }

@@ -1,6 +1,7 @@
 #pragma once
 #include <cstdlib>
 #include <time.h>
+#include "image.h"
 
 
 namespace NikVi {
@@ -55,8 +56,7 @@ namespace NikVi {
 	private: System::Windows::Forms::PictureBox^  pictureBox1;
 	private: System::Windows::Forms::TextBox^  txbSaveName;
 	private: System::Windows::Forms::TextBox^  txbFileName;
-
-
+	
 
 	private: System::Windows::Forms::OpenFileDialog^  openFileDialog1;
 
@@ -152,6 +152,9 @@ namespace NikVi {
 
 		}
 #pragma endregion
+	
+
+	
 	private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e);
 	private: System::Void button2_Click(System::Object^  sender, System::EventArgs^  e);
 	private: System::Void btnOpen_Click(System::Object^  sender, System::EventArgs^  e);
