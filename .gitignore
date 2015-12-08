@@ -2,5 +2,4 @@ Debug
 *.opensdf
 *.sdf
 *.suo
-/NikVi
-/mushnikVisionApp
+/.metadata
