@@ -1,17 +1,12 @@
 import java.awt.EventQueue;
-
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
-import javax.swing.JTextField;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
-
-
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import java.awt.image.ImageFilter;
 import java.io.File;
 import javax.swing.JLabel;
 
@@ -77,7 +72,7 @@ public class MainFrame {
 		frame.getContentPane().add(btnOfenFile);
 		
 		lblNewLabel = new JLabel("No  file chosen");
-		lblNewLabel.setBounds(109, 15, 711, 14);
+		lblNewLabel.setBounds(126, 15, 711, 14);
 		frame.getContentPane().add(lblNewLabel);
 	}
 }
