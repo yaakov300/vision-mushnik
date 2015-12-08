@@ -1,5 +1,4 @@
 INDEX VERSION 1.126+C:\Users\Yaacov\Documents\GitHub\vision-mushnik\New folder\.metadata\.plugins\org.eclipse.jdt.core
-4194271827.index
 2193799835.index
 1028199574.index
 3991718231.index
