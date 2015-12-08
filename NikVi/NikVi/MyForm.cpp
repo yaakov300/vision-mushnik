@@ -7,7 +7,8 @@ using namespace System;
 using namespace System::Windows::Forms;
 using namespace std;
 
-[STAThread]
+
+//[STAThread]
 void Main(array<String^>^ args)
 {
 	
@@ -39,16 +40,11 @@ namespace NikVi
 
 	void MyForm::btnOpen_Click(System::Object^  sender, System::EventArgs^  e)
 	{	
-		
-		int M, N, Q; // rows, cols, grayscale
-		bool type;
-		ImageMatrix image;
-		
 		string copyFileNameToString = "";
 		char *copyFileNameToChar;
 
 		//read the path of image(FileName).
-		this->openFileDialog1->Filter = "PGM|*.pgm";
+		this->openFileDialog1->Filter = "BMP|*.bmp";
 		if (this->openFileDialog1->ShowDialog() == System::Windows::Forms::DialogResult::OK)
 		{
 			this->txbFileName->Text = this->openFileDialog1->FileName;
@@ -60,19 +56,7 @@ namespace NikVi
 			copyFileNameToChar = new char[copyFileNameToString.length() + 1];
 			strcpy(copyFileNameToChar, copyFileNameToString.c_str());
 
-			// read image header 
-			if (image.readImageHeader(copyFileNameToChar, N, M, Q, type) == 1)
-			{
-
-				this->txbFileName->Text = "it works";
-
-			}
-		}
-		 
-
-		
+		}	
 		delete[] copyFileNameToChar;
 	}
-	
-
 }
