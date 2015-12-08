@@ -16,5 +16,16 @@ namespace mushnikVisionApp
         {
             InitializeComponent();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            // Show the dialog and get result.
+            DialogResult result = openFileDialogImage.ShowDialog();
+            if (result == DialogResult.OK) // Test result.
+            {
+            }
+            Console.WriteLine(result); // <-- For debugging use.
+            ImageToMatrix image = new ImageToMatrix();           
+        }
     }
 }

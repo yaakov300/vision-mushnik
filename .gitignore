@@ -2,7 +2,7 @@ Debug
 *.opensdf
 *.sdf
 *.suo
-
+/ViNik
 /NikVi
 /NikVi/NikVi
 /New folder
