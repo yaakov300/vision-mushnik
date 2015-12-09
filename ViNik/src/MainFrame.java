@@ -58,15 +58,11 @@ public class MainFrame {
 		//listener of open file button 
 		btnOfenFile.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) 
-			{	
-				
-				//File workingDirectory = new File(System.getProperty("user.dir")+"\\Images");//path to Images directory
-				System.out.println(""+System.getProperty("user.dir")+"\\Images");
+			{								
 				JFileChooser fc = new JFileChooser();//create a file open dialog
 				fc.setCurrentDirectory(new File(System.getProperty("user.dir")+"\\Images"));//the folder path to Images directory that is open
 				FileFilter imageFilter = new FileNameExtensionFilter("Image files", ImageIO.getReaderFileSuffixes());//filter for image only "jpg jpeg bmp png wbmp gif"
 				fc.addChoosableFileFilter(imageFilter);
-				//fc.setCurrentDirectory(new File(System.getProperty("user.home")));//the folder that is open
 				fc.setAcceptAllFileFilterUsed(true);
 				if(fc.showOpenDialog(null)==JFileChooser.APPROVE_OPTION)
 				{
@@ -96,9 +92,6 @@ public class MainFrame {
 		lblNewLabel = new JLabel("No  file chosen");
 		lblNewLabel.setBounds(126, 15, 711, 14);
 		frame.getContentPane().add(lblNewLabel);
-		
-		
-		
 	}
 
 	//this function return array[][] after convert from BufferedImage image: 
@@ -145,5 +138,6 @@ public class MainFrame {
 
 		return result;
 	}
+	
 }
 
