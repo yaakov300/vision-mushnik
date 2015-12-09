@@ -13,8 +13,9 @@ import javax.swing.JLabel;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
 
-import javax.imageio.ImageIO;
-import javax.swing.JPanel;
+
+import javax.swing.JTextField;
+import java.awt.Color;
 
 public class MainFrame {
 
@@ -23,7 +24,8 @@ public class MainFrame {
 	private BufferedImage image;
 	int[][] imageArrayint;
 	imageJPanel imageJPanel;
-	
+	private JTextField textField;
+	String[] stringShape = {"Straight line"};
 	// Launch the application.
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -90,8 +92,15 @@ public class MainFrame {
 		frame.getContentPane().add(btnOfenFile);
   
 		lblNewLabel = new JLabel("No  file chosen");
-		lblNewLabel.setBounds(126, 15, 711, 14);
+		lblNewLabel.setBackground(Color.GRAY);
+		lblNewLabel.setBounds(126, 15, 536, 14);
 		frame.getContentPane().add(lblNewLabel);
+		
+		textField = new JTextField();
+		textField.setBounds(10, 56, 158, 46);
+		frame.getContentPane().add(textField);
+		textField.setColumns(10);
+		
 	}
 
 	//this function return array[][] after convert from BufferedImage image: 
@@ -138,6 +147,5 @@ public class MainFrame {
 
 		return result;
 	}
-	
 }
 
