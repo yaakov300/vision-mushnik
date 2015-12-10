@@ -81,6 +81,10 @@ public class MainFrame {
 					
 					imageJPanel = new imageJPanel(imageArrayint);
 					imageJPanel.setBounds(268, 40, 610, 440);
+					
+					StraightLine straightLine = new StraightLine(imageArrayint);
+					imageJPanel.setStraightLine(straightLine);
+					
 					frame.getContentPane().add(imageJPanel);
 					frame.repaint();
 				}
