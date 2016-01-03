@@ -60,13 +60,31 @@ public class imageJPanel extends JPanel{
 		int h = getHeight();
 		int w = getWidth();
 		g2d.setColor(Color.GREEN);
-
+		double m0 = straightLine.getM()[0];
+		double m1 = straightLine.getM()[1];
+		double n0 = straightLine.getN()[0];
+		double n1 = straightLine.getN()[1];
+		double denominator0 = Math.pow(1 + Math.pow(m0 , 2 ) , 0.5);
+		double denominator1 = Math.pow(1 + Math.pow(m1 , 2 ) , 0.5);
+		
 		for (int i = 0; i < h; i++) 
 		{
 			for (int j = 0; j < w; j++) 
 			{
-				if(i >= (j *  straightLine.getM()[1]) + straightLine.getN()[1] - 3 &&
-						i <= (j *  straightLine.getM()[1]) + straightLine.getN()[1] + 3)
+				double distans0 = Math.abs(m0 * j - i + n0) / denominator0;
+				double distans1 = Math.abs(m1 * j - i + n1) / denominator1;
+				
+				if(distans0 <= 3)
+				{
+					g2d.drawLine(j, i, j, i);
+				}
+				if(distans1 <= 3)
+				{
+					g2d.drawLine(j, i, j, i);
+				}
+				
+				/*if((i >= (j *  straightLine.getM()[1]) + straightLine.getN()[1] - 3 &&
+						i <= (j *  straightLine.getM()[1]) + straightLine.getN()[1] + 3))
 				{			
 					
 					g2d.drawLine(j, i, j, i);
@@ -76,7 +94,7 @@ public class imageJPanel extends JPanel{
 				{			
 					
 					g2d.drawLine(j, i, j, i);
-				}
+				}*/
 			}
 		}
 

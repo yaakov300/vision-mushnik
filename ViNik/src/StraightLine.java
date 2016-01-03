@@ -141,7 +141,7 @@ public class StraightLine {
 	{
 		int delta = 0;
 		for (int i = 0; i < imageArrayMoveToCenterOfMass.length; i++) {
-			delta += Math.pow(imageArrayMoveToCenterOfMass[i][0], 2) - Math.pow(imageArrayMoveToCenterOfMass[i][1], 2); //x'^2 - y'^2 
+			delta += Math.pow(imageArrayMoveToCenterOfMass[i][1], 2) - Math.pow(imageArrayMoveToCenterOfMass[i][0], 2); //x'^2 - y'^2 
 		}
 		return delta; 
 	}
